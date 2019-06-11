@@ -1,6 +1,9 @@
-FROM docker:latest
+FROM docker:stable
 LABEL maintainer "Nithiwat Kampanya"
 
-RUN apk --no-cache add zip groff less python py-pip jq python-dev libc-dev gcc && \
-        pip --no-cache-dir install docker-compose awscli aws-sam-cli && \
+RUN apk --no-cache add bash curl zip groff less python jq python-dev libc-dev gcc make libffi-dev && \
+        python -m ensurepip && \
+        pip --no-cache-dir install awscli aws-sam-cli docker-compose && \
         rm -rf /var/cache/apk/*
+
+CMD ["/bin/bash"]
